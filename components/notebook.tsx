@@ -22,7 +22,7 @@ const Content1 = () =>  {
         }
     } 
     
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
     const [prompt, setPrompt] = useState('');
 
     // Array of imported pages
