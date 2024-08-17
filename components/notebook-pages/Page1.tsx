@@ -29,7 +29,7 @@ return (
             alt="Picture of the author"
             />
         <p>
-            Eventually, we end up with a huge set of words found <u>alongside</u> <b>WORK</b> in the training data as well as those that <u>weren't</u> found near it.
+            Eventually, we end up with a huge set of words found <u>alongside</u> <b>WORK</b> in the training data as well as those that <u>weren&apos;t</u> found near it.
         </p>
         <Image
             src="/img/img7.png"
