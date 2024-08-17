@@ -52,14 +52,8 @@ const Content1 = () =>  {
                 {prompt}
               </div>
             )}
-  
-  <div className="flex justify-center items-center">
-                <button className="bg-white hover:bg-gray-100 inline-flex items-center text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow gap-1" 
-                  onClick={() => executeChatPanelFunctionWrapper(prompt)}
-                >
-                  Please Explain Again
-                </button>
-              </div>
+          
+        <div style={{ height: '50px' }}></div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between'}}>
           <button className="bg-white hover:bg-gray-100 inline-flex items-center text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow gap-1"
@@ -68,6 +62,13 @@ const Content1 = () =>  {
           >
             <span style={{ transform: 'scaleX(-1)' }}><IconArrowRight /></span>Previous Page 
           </button>
+
+          <button className="bg-black hover:bg-black inline-flex items-center text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow gap-1" 
+                  onClick={() => executeChatPanelFunctionWrapper(prompt)}
+                >
+                  Please Explain Again
+                </button>
+
           <button className="bg-white hover:bg-gray-100 inline-flex items-center text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow gap-1"
             onClick={nextPage} 
             disabled={currentPage === pages.length - 1}
