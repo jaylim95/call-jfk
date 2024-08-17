@@ -57,7 +57,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <div className="flex flex-col h-screen">
             <Header />
             <div className="flex flex-row flex-1 overflow-hidden">
-            <div className="w-[70%] overflow-auto px-4 py-4">
+            <div className="w-[70%] overflow-auto px-10 py-4">
                 <Content1 />
               </div>
               <main className="w-[30%] overflow-auto bg-muted/50">
