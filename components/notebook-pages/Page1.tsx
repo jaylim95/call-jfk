@@ -21,7 +21,7 @@ return (
             height={500}
             alt="Picture of the author"
             />
-        <p>In order to grasp a word’s meaning, let’s say work in our example, LLM observe it in the context of the enormous training data, taken notes of nearby words.</p>
+        <p>In order to grasp a word&apos;s meaning, let&apos;s say work in our example, LLM observe it in the context of the enormous training data, taken notes of nearby words.</p>
         <Image
             src="/img/img3.png"
             width={500}
@@ -47,8 +47,8 @@ return (
             alt="Picture of the author"
         />
         <p>This vector is known as a <b>word embedding</b></p>
-        <p>A word embedding can have hundreds of values, each representing a different aspect of a word’s meaning. </p>
-        <p>Just as you might describe a house by its characteristics — type, location, bedrooms, bathrooms, storeys — the values in an embedding quantify a word’s linguistic features.</p>
+        <p>A word embedding can have hundreds of values, each representing a different aspect of a word&apos;s meaning. </p>
+        <p>Just as you might describe a house by its characteristics — type, location, bedrooms, bathrooms, storeys — the values in an embedding quantify a word&apos;s linguistic features.</p>
         <p>In words embedding, words we expect to be used in comparable ways often have similar-looking embeddings.</p>
         <Image
             src="/img/img9.png"

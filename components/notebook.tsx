@@ -28,11 +28,11 @@ const Content1 = () =>  {
   
     useEffect(() => {
       const importPage = async (r: any) => {
-        const module = await r();
-        if (!module.default) {
+        const mymodule = await r();
+        if (!mymodule.default) {
           throw new Error(`No default export found for page ${r}`);
         }
-        return module;
+        return mymodule;
       };
   
       const loadPages = async () => {
