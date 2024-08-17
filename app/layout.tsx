@@ -7,6 +7,8 @@ import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
+import Content1 from '@/components/notebook'
+
 
 export const metadata = {
   metadataBase: process.env.VERCEL_URL
@@ -52,9 +54,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col min-h-screen">
+          <div className="flex flex-col h-screen">
             <Header />
-            <main className="flex flex-col flex-1 bg-muted/50">{children}</main>
+            <div className="flex flex-row flex-1 overflow-hidden">
+            <div className="w-[70%] overflow-auto px-4 py-4">
+                <Content1 />
+              </div>
+              <main className="w-[30%] overflow-auto bg-muted/50">
+                {children}
+              </main>
+              
+            </div>
           </div>
           <TailwindIndicator />
         </Providers>
