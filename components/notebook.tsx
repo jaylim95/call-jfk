@@ -44,13 +44,13 @@ const Content1 = () =>  {
           const loadedPages = await Promise.all(
             pageKeys.map(async (key: string, index: number) => {
               try {
-                const module = await importPage(() => import(`./notebook-pages/${key.replace(/^\.\//, '')}`));
+                const mymodule = await importPage(() => import(`./notebook-pages/${key.replace(/^\.\//, '')}`));
                 console.log(`Successfully loaded page: ${key}`);
                 return {
                   key: index,
                   name: key.replace(/^\.\//, '').replace(/\.tsx$/, ''),
-                  component: dynamic(() => Promise.resolve(module.default)),
-                  prompt: module.prompt || '',
+                  component: dynamic(() => Promise.resolve(mymodule.default)),
+                  prompt: mymodule.prompt || '',
                 };
               } catch (error) {
                 console.error(`Error loading page ${key}:`, error);

@@ -38,7 +38,7 @@ return (
             alt="Picture of the author"
         />
         <p>
-        As the model <u>processes</u> this set of words, it produces a vector (a list of values)
+        As the model <u>processes</u> this set of words, it produces a vector &#40;a list of values	&#41;
         </p>
         <Image
             src="/img/img8.png"
