@@ -4,13 +4,10 @@ import dynamic from 'next/dynamic';
 import useStore from "@/app/store/store";
 import { Button } from './ui/button';
 import { IconArrowRight } from './ui/icons';
+import Page1 from './notebook-pages/Page1';
+import Page2 from './notebook-pages/Page2';
+import Page3 from './notebook-pages/Page3';
 
-type Page = {
-  key: number;
-  name: string;
-  component: React.ComponentType;
-  prompt: string;
-};
 
 const Content1 = () =>  {
     const {  executeChatPanelFunction } = useStore();
@@ -22,109 +19,58 @@ const Content1 = () =>  {
         }
     } 
     
-    const [pages, setPages] = useState<Page[]>([]);
-    const [currentPageIndex, setCurrentPageIndex] = useState(0);
-    const [loadingError, setLoadingError] = useState<string | null>(null);
-  
-    useEffect(() => {
-      const importPage = async (r: any) => {
-        const mymodule = await r();
-        if (!mymodule.default) {
-          throw new Error(`No default export found for page ${r}`);
-        }
-        return mymodule;
-      };
-  
-      const loadPages = async () => {
-        try {
-          const pageContext = (require as any).context('./notebook-pages', true, /\.tsx$/);
-          const pageKeys = pageContext.keys();
-          console.log(`Found ${pageKeys.length} pages:`, pageKeys);
-  
-          const loadedPages = await Promise.all(
-            pageKeys.map(async (key: string, index: number) => {
-              try {
-                const mymodule = await importPage(() => import(`./notebook-pages/${key.replace(/^\.\//, '')}`));
-                console.log(`Successfully loaded page: ${key}`);
-                return {
-                  key: index,
-                  name: key.replace(/^\.\//, '').replace(/\.tsx$/, ''),
-                  component: dynamic(() => Promise.resolve(mymodule.default)),
-                  prompt: mymodule.prompt || '',
-                };
-              } catch (error) {
-                console.error(`Error loading page ${key}:`, error);
-                throw error;
-              }
-            })
-          );
-  
-          setPages(loadedPages);
-          console.log('All pages loaded successfully');
-        } catch (error) {
-          console.error('Error loading pages:', error);
-          setLoadingError('Failed to load one or more pages. Check the console for details.');
-        }
-      };
-  
-      loadPages();
-    }, []);
-  
-    const goToPreviousPage = () => {
-      setCurrentPageIndex((prevIndex) => 
-        prevIndex > 0 ? prevIndex - 1 : prevIndex
-      );
-    };
-  
-    const goToNextPage = () => {
-      setCurrentPageIndex((prevIndex) => 
-        prevIndex < pages.length - 1 ? prevIndex + 1 : prevIndex
-      );
-    };
-  
-    const currentPage = pages[currentPageIndex];
+    const [currentPage, setCurrentPage] = useState(0);
+    const [prompt, setPrompt] = useState('');
 
-    if (loadingError) {
-      return <div>Error: {loadingError}</div>;
-    }
+    // Array of imported pages
+    const pages = [
+      <Page1 key="1" setPrompt={setPrompt} />,
+      <Page2 key="2" setPrompt={setPrompt} />,
+      <Page3 key="3" setPrompt={setPrompt} />
+    ];
+
+
+    const nextPage = () => {
+      if (currentPage < pages.length - 1) {
+        setCurrentPage(currentPage + 1);
+      }
+    };
+  
+    const prevPage = () => {
+      if (currentPage > 0) {
+        setCurrentPage(currentPage - 1);
+      }
+    };
+   
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
+        {pages[currentPage]}
         <div style={{ flexGrow: 1 }}>
-          
-          {pages.length === 0 ? (
-            <div>Loading pages...</div>
-          ) : currentPage ? (
-            <div key={currentPage.key}>
-              <h2>{currentPage.name}</h2>
-              <currentPage.component />
-              
-              
-              
-              
-              <div className="flex justify-center items-center">
+              {prompt && (
+              <div className="mt-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
+                {prompt}
+              </div>
+            )}
+  
+  <div className="flex justify-center items-center">
                 <button className="bg-white hover:bg-gray-100 inline-flex items-center text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow gap-1" 
-                  onClick={() => executeChatPanelFunctionWrapper(currentPage.prompt)}
+                  onClick={() => executeChatPanelFunctionWrapper(prompt)}
                 >
                   Please Explain Again
                 </button>
               </div>
-              
-            </div>
-          ) : (
-            <div>No pages found</div>
-          )}
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between'}}>
           <button className="bg-white hover:bg-gray-100 inline-flex items-center text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow gap-1"
-            onClick={goToPreviousPage} 
-            disabled={currentPageIndex === 0}
+            onClick={prevPage} 
+            disabled={currentPage === 0}
           >
             <span style={{ transform: 'scaleX(-1)' }}><IconArrowRight /></span>Previous Page 
           </button>
           <button className="bg-white hover:bg-gray-100 inline-flex items-center text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow gap-1"
-            onClick={goToNextPage} 
-            disabled={currentPageIndex === pages.length - 1}
+            onClick={nextPage} 
+            disabled={currentPage === pages.length - 1}
           >
             Next Page <IconArrowRight />
           </button>

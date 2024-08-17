@@ -1,7 +1,15 @@
 // components/notebook/Page1.tsx
-import React from 'react';
+import React, {useEffect} from 'react';
+import Image from 'next/image';
 
-export default function Page3() {
+interface Page1Props {
+    setPrompt: (prompt: string) => void;
+  }
+
+export default function Page({ setPrompt }: Page1Props) {
+    useEffect(() => {
+        setPrompt('Welcome to the introduction page.');
+      }, [setPrompt]);
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Introduction</h1>

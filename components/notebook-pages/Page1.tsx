@@ -1,8 +1,15 @@
 // components/notebook/Page1.tsx
-import React from 'react';
+import React, {useEffect} from 'react';
 import Image from 'next/image';
 
-export default function Page1() {
+interface Page1Props {
+    setPrompt: (prompt: string) => void;
+  }
+
+export default function Page({ setPrompt }: Page1Props) {
+    useEffect(() => {
+        setPrompt('Explain what is tokens, Word Embeddings and how word embeddings are generated to a 12 years old.');
+      }, [setPrompt]);
 
 return (
     <div className="flex flex-col justify-center items-center space-y-3">
