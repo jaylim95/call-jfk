@@ -19,7 +19,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
         <IconUser />
       </div>
       <div className="ml-4 flex-1 space-y-2 overflow-hidden pl-2">
-        {String(children).replace(/\bto a \d+ years? old\b/i, '')}
+        {String(children).replace(/\b to a \d+ years? old\b/i, '')}
       </div>
     </div>
   )
