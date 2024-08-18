@@ -136,6 +136,8 @@ async function confirmPurchase(symbol: string, price: number, amount: number) {
     
     If the user wants to complete a task or ask a question unrelated to generative AI, respond that you cannot do that.
     
+    When you reply, explain concepts to a 12 years old.
+
     Besides that, you can also chat with users and do some calculations if needed.`,
     messages: [
       ...aiState.get().messages.map((message: any) => ({
